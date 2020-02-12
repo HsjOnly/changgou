@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: service-order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.211.132:3306/changgou_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.211.132
+    port: 6379
+  rabbitmq:
+    host: 192.168.211.132
+    port: 5672
+    virtual-host: /weixinpay
+    username: guest
+    password: guest
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 10008
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    connection-timeout: 99999
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+          strategy: SEMAPHORE
+mq:
+  exchangename: exchange.order
+  commonorder: # 普通订单
+    routingkeyname: routing.key.commonorder
+    queuename:  queue.commonorder

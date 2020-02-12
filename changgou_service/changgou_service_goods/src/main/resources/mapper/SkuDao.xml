@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.changgou.goods.dao.SkuDao">
+    <insert id="insertSkuList" parameterType="list">
+        insert into tb_sku values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.sn}, #{item.name}, #{item.price}, #{item.num}, #{item.alertNum}, #{item.image}, #{item.images}, #{item.weight}, #{item.createTime}, #{item.updateTime}, #{item.spuId}, #{item.categoryId}, #{item.categoryName}, #{item.brandName}, #{item.spec}, #{item.saleNum}, #{item.commentNum}, #{item.status})
+        </foreach>
+    </insert>
+
+    <update id="updateSkuByIdAndSaleNum">
+        update tb_sku set num = num - #{saleNum}, sale_num = sale_num + #{saleNum} where id = #{skuId} and num >= #{saleNum}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

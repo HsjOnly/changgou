@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>changgou_parent</artifactId>
+        <groupId>com.itheima</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>changgou_service_api</artifactId>
+    <packaging>pom</packaging>
+    <description>此工程为所有需要使用到的POJO的父工程</description>
+    <modules>
+        <module>changgou_service_goods_api</module>
+        <module>changgou_service_content_api</module>
+        <module>changgou_service_search_api</module>
+        <module>changgou_service_user_api</module>
+        <module>changggou_service_order_api</module>
+        <module>changgou_service_seckill_api</module>
+    </modules>
+
+
+    <dependencies>
+        <!--通用的common-->
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>changgou_common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--每个工程都有Pojo，都需要用到该包对应的注解-->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

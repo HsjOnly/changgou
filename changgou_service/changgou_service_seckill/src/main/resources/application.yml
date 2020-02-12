@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: service-seckill
+  redis:
+    host: 192.168.211.132
+    port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.211.132:3306/changgou_seckill?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+  rabbitmq:
+    host: 192.168.211.132
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /weixinpay
+server:
+  port: 10011
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+logging:
+  level:
+    com.itheima.changgou.sekill: debug
+mq:
+  exchangename: exchange.order
+  delayexchangename: exchange.delay # 转发延时消息的交换机
+  seckillorder: # 秒杀订单
+    routingkeyname: routing.key.sekillorder
+    queuename:  queue.seckillorder
+  check: # 检查订单超时的队列
+    routingkeyname: routing.key.sekillorder.check
+    queuename: queue.sekillorder.check
+    delay: # 检查订单超时的延时队列
+      routingkeyname: routing.key.sekillorder.check.delay
+      queuename: queue.sekillorder.check.delay
+
+

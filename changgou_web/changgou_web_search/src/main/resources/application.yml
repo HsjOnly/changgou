@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-search-web
+  thymeleaf:
+    cache: false
+server:
+  port: 10006
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+
+

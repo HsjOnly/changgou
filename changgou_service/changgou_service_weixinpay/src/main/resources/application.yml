@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: service-weixinpay
+  rabbitmq:
+    host: 192.168.211.132
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /weixinpay
+server:
+  port: 10010
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    ip-address: true
+feign:
+  hystrix:
+    enabled: true
+weixin:
+  appid: wx8397f8696b538317 #公众账号ID
+  mchid: 1473426802 #商户号ID
+  partnerkey: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb #签名密钥
+  notifyurl: http://fengyeyuyue.eicp.net/weiXinPay/recieveResultNotify #通知地址
+  unifiedorderurl: https://api.mch.weixin.qq.com/pay/unifiedorder #申请支付订单地址
+  orderqueryurl: https://api.mch.weixin.qq.com/pay/orderquery #查询订单地址
+mq:
+  exchangename: exchange.order
+  commonorder: # 普通订单
+    routingkeyname: routing.key.commonorder
+    queuename:  queue.commonorder
+  seckillorder: # 秒杀订单
+    routingkeyname: routing.key.sekillorder
+    queuename:  queue.seckillorder

@@ -1,0 +1,58 @@
+server:
+  port: 9999
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: gateway-web
+  redis:
+    host: 192.168.211.132
+    port: 6379
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        - id: service-goods
+          uri: lb://service-goods
+          predicates:
+            - Path=/goods/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}" # 限速对单个IP生效
+                redis-rate-limiter.replenishRate: 1 # 令牌桶每秒添加的令牌
+                redis-rate-limiter.burstCapacity: 5 # 令牌桶最大令牌数
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+        - id: service-order
+          uri: lb://service-order
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: true
