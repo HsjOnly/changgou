@@ -16,15 +16,6 @@ spring:
     port: 6379
   cloud:
     gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
       routes:
         - id: service-goods
           uri: lb://service-goods

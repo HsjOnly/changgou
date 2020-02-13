@@ -12,6 +12,7 @@ import com.itheima.changgou.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -104,5 +105,27 @@ public class OrderServiceImpl implements OrderService {
         order.setTransactionId(map.get("transaction_id"));
         order.setPayStatus("1");
         orderDao.updateByPrimaryKeySelective(order);
+    }
+
+    @Override
+    public List<Order> ListOrderByUsername(String username) {
+        // 获取订单
+        Example example = new Example(Order.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", username);
+        List<Order> orderList = orderDao.selectByExample(example);
+
+        for (Order order : orderList) {
+            // 获取订单商品
+            example = new Example(OrderItem.class);
+            criteria = example.createCriteria();
+            criteria.andEqualTo("orderId", order.getId());
+            List<OrderItem> orderItemList = orderItemDao.selectByExample(example);
+
+            // 封装订单
+            order.setOrderItems(orderItemList);
+        }
+
+        return orderList;
     }
 }

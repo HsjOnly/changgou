@@ -2,7 +2,7 @@ package com.itheima.changgou.order.service;
 
 import com.itheima.changgou.order.pojo.Order;
 
-import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,4 +14,6 @@ public interface OrderService {
     void insertOrder(String username, Order order);
 
     void updateOrder(Map<String, String> map) throws Exception;
+
+    List<Order> ListOrderByUsername(String username);
 }
