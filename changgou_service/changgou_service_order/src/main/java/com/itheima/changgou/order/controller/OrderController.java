@@ -42,4 +42,11 @@ public class OrderController {
         return new Result<>(true,StatusCode.OK, "获取订单成功", orderList);
     }
 
+    @RequestMapping("/cancelOrderByOrderId")
+    public Result cancelOrderByOrderId(Long orderId, HttpServletRequest request) {
+        String username = getUserNameFromRequest(request);
+        orderService.cancelOrderByOrderId(orderId);
+        return new Result(true, StatusCode.OK, "取消订单成功");
+    }
+
 }

@@ -28,8 +28,8 @@ public class WeiXinPayController {
      * @Author narcissu
      * @Date 2020/1/22 17:46
      **/
-    @PostMapping("/createOrder")
-    public Result createCommOrder(@RequestBody Map<String, String> parameters) throws Exception {
+    @RequestMapping("/createOrder")
+    public Result createCommOrder(@RequestParam Map<String, String> parameters) throws Exception {
         String codeUrl = weiXinPayService.createPayOrder(parameters);
 
         String orderCategory = parameters.get("orderCategory");
@@ -49,8 +49,6 @@ public class WeiXinPayController {
     public String recieveResultNotify(@RequestBody String resultXml) throws Exception {
         // 调用Service处理通知结果
         return weiXinPayService.recieveResultNotify(resultXml);
-
-
     }
 
 

@@ -53,7 +53,7 @@ public class WeiXinPayServiceImpl implements WeiXinPayService {
         paramMap.put("body", "畅购商品");
         // 添加附加参数
         paramMap.put("attach", JSON.toJSONString(paramMap));
-        paramMap.put("out_trade_no", paramMap.get("orderId"));
+        paramMap.put("out_trade_no", parameters.get("orderId"));
         paramMap.put("total_fee", 1 + ""); //支付金额 todo 需要从订单中取出
         paramMap.put("spbill_create_ip", "127.0.0.1");
         paramMap.put("notify_url", notifyUrl);// 通知地址

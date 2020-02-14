@@ -128,4 +128,14 @@ public class OrderServiceImpl implements OrderService {
 
         return orderList;
     }
+
+    @Override
+    public void cancelOrderByOrderId(Long orderId) {
+        Order order = new Order();
+        order.setId(orderId+"");
+        order.setPayStatus(0+"");
+        order.setOrderStatus("0");
+        order.setConsignStatus("0");
+        orderDao.updateByPrimaryKeySelective(order);
+    }
 }

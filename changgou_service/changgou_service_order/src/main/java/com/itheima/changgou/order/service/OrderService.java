@@ -16,4 +16,6 @@ public interface OrderService {
     void updateOrder(Map<String, String> map) throws Exception;
 
     List<Order> ListOrderByUsername(String username);
+
+    void cancelOrderByOrderId(Long orderId);
 }
